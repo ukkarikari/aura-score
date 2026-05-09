@@ -16,6 +16,10 @@ ACME! aura tracker
 
 ---
 
+<div align="center">
+
 <br>
 
 [documentation/dev-notes](docs/DOCS.md)
+
+</div>
