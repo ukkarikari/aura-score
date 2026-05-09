@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}LOGIN{% endblock %} {% block content
+%}
+
+<h2>login</h2>
+
+<hr />
+
+<form hx-post="/login">
+    <br />
+    <input name="username" placeholder="user" />
+    <br /><br />
+    <input name="password" type="password" placeholder="pass" />
+    <br /><br />
+    <button type="submit">login</button>
+    <br /><br /><br />
+</form>
+{% endblock %}

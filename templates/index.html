@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}INDEX{% endblock %} {% block content
+%}
+
+<h1 style="padding-top: 5%">AURA SCORE</h1>
+<br /><br /><br />
+<hr />
+{{ scoreboard | safe }}
+<hr />
+<br /><br /><br />
+<a href="/vote-page"
+    ><p
+        style="
+            text-align: center;
+            font-family: Roboto;
+            color: #ffffff;
+            font-size: 26px;
+        "
+    >
+        VOTE
+    </p></a
+>
+
+{% endblock %}

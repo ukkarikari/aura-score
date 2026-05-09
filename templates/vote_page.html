@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}VOTE{% endblock %} {% block content
+%}
+
+<h2>voting as {{ current_user }}</h2>
+
+<form hx-post="/vote" hx-target="#scoreboard" hx-swap="innerHTML">
+    <select name="target">
+        {% for user in options %}
+        <option value="{{ user }}">{{ user }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="value">
+        <option value="1">+</option>
+        <option value="-1">-</option>
+    </select>
+
+    <button type="submit">vote</button>
+</form>
+<hr />
+<div id="scoreboard">{{ scoreboard | safe }}</div>
+
+{% endblock %}
