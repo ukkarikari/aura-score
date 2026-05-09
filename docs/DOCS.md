@@ -3,7 +3,7 @@
 
 # development notes for aura score 
 
-(commit e5b7580ab70442ee10419c9f41442c7745c3e15f)
+documentation so that i dont forget whats goin on in the architecture and can log changes
 
 </div>
 
@@ -91,6 +91,8 @@ contains the html jinja files that are returned by `api/pages.py`
 
 --- 
 
+<br>
+
 # ideas/mayybe
 ### vote history page 
 - show target vote history (reason, voters, etc)
@@ -99,12 +101,14 @@ contains the html jinja files that are returned by `api/pages.py`
 ### alt score tab
 - alternate scoreboard for non-voter users
 
+<br>
+
 ---
 
 <br>
 
 <div align="center">
 
-this documentation is temp
+i hope it made sense to you, cos it doesnt make sense to me
 
 </div>
