@@ -17,7 +17,9 @@ def login(
     user = users.get(username)
 
     if not user or user["password"] != password:
-        return HTMLResponse("<p>bad login</p>")
+        response = HTMLResponse("<p>bad login</p>")
+        response.headers["HX-Redirect"] = "/login"
+        return response
 
     session_id = str(uuid.uuid4())
     sessions[session_id] = username

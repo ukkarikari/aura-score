@@ -14,7 +14,9 @@ class Vote(Base):
     value = Column(Integer, nullable=False)
     reason = Column(Text)
     created_at = Column(
-        DateTime(timezone=True), server_default=func.now(), nullable=False
+        DateTime(timezone=True),
+        server_default=func.timezone("America/Sao_Paulo", func.now()),
+        nullable=False,
     )
 
 

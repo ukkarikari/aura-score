@@ -15,6 +15,7 @@ router = APIRouter()
 def vote(
     target: str = Form(...),
     value: str = Form(...),
+    reason: str = Form(...),
     session_id: str | None = Cookie(default=None),
 ):
     username = get_current_user(session_id)
@@ -32,7 +33,9 @@ def vote(
     # --- add vote to db
     db = SessionLocal()
     try:
-        new_vote_row = Vote(voter_id=username, target_id=target, value=int(value))
+        new_vote_row = Vote(
+            voter_id=username, target_id=target, value=int(value), reason=(reason)
+        )
         db.add(new_vote_row)
         db.commit()
 

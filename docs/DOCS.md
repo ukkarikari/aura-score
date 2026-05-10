@@ -20,7 +20,7 @@ endpoints go here
 - `/vote` POST endpoint
   does some validation (like if the current_user isnt the target user) and commits the new vote to the db. returns an instance of `render_scoreboard()` with the updated scores
   - [ ] *TODO:* change this to just return a change of states or smt. updates to `render_scoreboard()` should be managed by the render function
-  - [ ] *TODO:* update endpoint to accept vote reason
+  - [x] *TODO:* update endpoint to accept vote reason
   - [ ] *TODO:* add timeout service to this endpoint! prevent spam
 
 ### api/pages.py
@@ -31,8 +31,11 @@ endpoints go here
   - queries `render_scoreboard(scores)` for the `scoreboard_html`,
   - runs through the `users` dict to get a list of voting `options`
   - then passes all as context to the index jinja template and returns it.
-  - [ ] *TODO:* add vote reason text box
-  - [ ] *TODO:* replace form with a button and pop up input box to register vote 
+  - [x] *TODO:* add vote reason text box
+  - [ ] *TODO:* replace form with: 
+    - "+" "-" buttons in each row 
+    - on clicking a button, a pop up window appears with a text box (reason input) and a 'submit' button
+    - some sort of feedback afterwards
   - [ ] *TODO:* update to use new user model instead of `users` dict
   - [ ] *TODO:* (maybe) add a timeout element to page
 - `/` GET endpoint
@@ -68,6 +71,7 @@ users model and table declaration, not implemented yet
 
 ### db/models/vote.py
 vote model and table declaration. currently used for calculating the `scores` dict
+- [x] **TODO:** change timezone handling in created_at for librewolf users
 
 # services/
 
@@ -79,12 +83,14 @@ vote model and table declaration. currently used for calculating the `scores` di
 - defines the `render_scoreboard` function.
   - currently sorts the `users` dict (lol) in reverse order, then runs a loop defining each row div for the scoreboard, wrapping it in the scorebard div, and returning that
   - [ ] *TODO:* change this to some sort of auto update (maybe in `pages.py`?). so that scoreboard changes without needing user input
+  - [x] **TODO:** add last reason for vote in each row
 
 ### services/score_service.py
   stub for the scoring system.
   - currently just instanciates the `compute_scores` func which:
     - takes the `votes` dict and `users` list.
     - makes a `scores` dict by iterating through `users` and summing all the votes for each user in the `target_id` attribute of each vote
+  - [ ] **TODO:** gotta think of a better data structure to compose the current scores. 
 
 # templates/
 contains the html jinja files that are returned by `api/pages.py`

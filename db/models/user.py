@@ -11,7 +11,11 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, nullable=False)
     password_hash = Column(String, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    created_at = Column(
+        DateTime(timezone=True),
+        server_default=func.timezone("America/Sao_Paulo", func.now()),
+        nullable=False,
+    )
 
 
 class UserAdmin(ModelView, model=User):

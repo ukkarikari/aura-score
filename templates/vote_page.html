@@ -4,6 +4,8 @@
 <h2>voting as {{ current_user }}</h2>
 
 <form hx-post="/vote" hx-target="#scoreboard" hx-swap="innerHTML">
+    <br />
+
     <select name="target">
         {% for user in options %}
         <option value="{{ user }}">{{ user }}</option>
@@ -15,8 +17,11 @@
         <option value="-1">-</option>
     </select>
 
+    <input type="text" name="reason" />
+
     <button type="submit">vote</button>
 </form>
+<br />
 <hr />
 <div id="scoreboard">{{ scoreboard | safe }}</div>
 
