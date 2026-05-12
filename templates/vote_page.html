@@ -1,14 +1,14 @@
 {% extends "base.html" %} {% block title %}VOTE{% endblock %} {% block content
 %}
 
-<h2>voting as {{ current_user }}</h2>
+<h2>voting as {{ current_user.username }}</h2>
 
 <form hx-post="/vote" hx-target="#scoreboard" hx-swap="innerHTML">
     <br />
 
     <select name="target">
         {% for user in options %}
-        <option value="{{ user }}">{{ user }}</option>
+        <option value="{{ user.id }}">{{ user.username }}</option>
         {% endfor %}
     </select>
 

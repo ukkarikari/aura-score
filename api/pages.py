@@ -3,12 +3,11 @@ from fastapi.responses import HTMLResponse
 from fastapi.routing import APIRouter
 
 from core.templates import get_templates
-from core.users import users
 from db.database import SessionLocal
-from db.models.vote import Vote
 from services.auth import get_current_user
 from services.render_service import render_scoreboard
 from services.score_service import compute_scores
+from services.user_service import get_all_usernames, get_all_users, get_username_by_id
 
 router_root = APIRouter()
 router_vote_page = APIRouter()
@@ -32,24 +31,33 @@ def login_page(request: Request):
 @router_vote_page.get("/vote-page", response_class=HTMLResponse)
 def vote_page(request: Request, session_id: str | None = Cookie(default=None)):
 
-    current_user = get_current_user(session_id)
-    templates = get_templates()
+    db = SessionLocal()
 
+    templates = get_templates()
+    current_user = get_current_user(db, session_id)
+
+    # - [ ] **TODO:** change this to say "wrong login or something"
     if not current_user:
-        return HTMLResponse(
-            '<p style="font-size: 20px">Please <a href="/login">login</a></p>'
+        return templates.TemplateResponse(
+            request=request,
+            name="login.html",
+            context={"request": request},
         )
 
-    db = SessionLocal()
-    try:
-        vote_rows = db.query(Vote).all()
-    finally:
-        db.close()
+    current_username = get_username_by_id(db, current_user.id)  # pyright: ignore[reportArgumentType]
+    print(current_username)
 
-    scores = compute_scores(vote_rows, users)
+    users = get_all_users(db)
+
+    usernames = get_all_usernames(db)
+    print(usernames)
+
+    scores = compute_scores(db)
     scoreboard_html = render_scoreboard(scores)
 
-    options = [u for u in users if u != current_user]
+    # removes curr user from votign options
+    options = [u for u in users if u.id != current_user.id]  # pyright: ignore[reportGeneralTypeIssues]
+    print(options)
 
     return templates.TemplateResponse(
         request=request,
@@ -69,13 +77,11 @@ def home(request: Request):
     templates = get_templates()
 
     db = SessionLocal()
-    try:
-        vote_rows = db.query(Vote).all()
-    finally:
-        db.close()
 
-    scores = compute_scores(vote_rows, users)
+    scores = compute_scores(db)
     scoreboard_html = render_scoreboard(scores)
+
+    db.close()
 
     return templates.TemplateResponse(
         request=request,

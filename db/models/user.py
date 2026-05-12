@@ -1,5 +1,3 @@
-import json
-
 from sqladmin import ModelView
 from sqlalchemy import Column, DateTime, Integer, String, func
 

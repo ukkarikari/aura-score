@@ -1,5 +1,6 @@
 from db.database import SessionLocal
 from db.models.vote import Vote
+from services.user_service import get_user_by_username, get_username_by_id
 
 
 def render_scoreboard(scores):
@@ -8,14 +9,18 @@ def render_scoreboard(scores):
     db = SessionLocal()
 
     for user, score in sorted(scores.items(), key=lambda item: item[1], reverse=True):
+        # this is very chiense we need to change it later!!!
+        # maybe make it a function in score serrvice or somethiign
+        # ------ THIS VVVVVVVVV -----
+        target_user = get_user_by_username(db, user)
         latest_vote = (
             db.query(Vote)
-            .filter(Vote.target_id == user)
+            .filter(Vote.target_id == target_user.id)
             .order_by(Vote.created_at.desc())
             .first()
         )
-
         reason = latest_vote.reason if latest_vote else "null"
+        # ----------------------------
 
         html += f"""
         <div class="row">
