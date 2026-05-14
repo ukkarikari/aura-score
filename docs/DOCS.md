@@ -13,11 +13,15 @@ documentation so that i dont forget whats goin on in the architecture and can lo
 
 # MAJOR NEXT STEPS :
 
-- [x] migrate `users` dict to proper `User` model
 - [ ] proper hashed authentication in `auth.py` and `/login` POST
 - [ ] overhaul to vote page (new layout instead of form)
 - [ ] TIMEOUT for `\vote` based on `session_id`!!
-- [ ] model and implement score computation to `score_service`
+- [ ] how to run the api from my machine and keep the cookies online on updates
+
+- [x] migrate `users` dict to proper `User` model
+- [x] model and implement score computation to `score_service`
+
+(2026/05/14) - i think i might put a pause on the weight modellign....it seems a bit counter intuitive. maybe i should just leave the raw sums of votes for now and then make a more complex scoring feature instead of trying to guess how the user behavior will be like
 
 ---
 
