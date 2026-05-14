@@ -28,6 +28,8 @@ class VoteAdmin(ModelView, model=Vote):
         Vote.id,
         Vote.voter_id,
         Vote.target_id,
+        Vote.voter,
+        Vote.target,
         Vote.value,
         Vote.reason,
         Vote.created_at,

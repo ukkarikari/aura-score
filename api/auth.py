@@ -48,10 +48,3 @@ def login(
     response.set_cookie(key="session_id", value=session_id)
 
     return response
-
-
-# @router.post("/login")
-# def login(
-#   username: str = Form(), password: str = Form(...), response: Response = None
-# ):
-#   user =

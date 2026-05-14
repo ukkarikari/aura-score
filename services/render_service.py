@@ -34,6 +34,7 @@ def render_scoreboard(scores):
             </div>
 
             <span class="score">{scores[user]}</span>
+            <!-- (for later) <span class="score">{"%.2f" % scores[user]} %</span> -->
         </div>
         """
     html += "</div>"

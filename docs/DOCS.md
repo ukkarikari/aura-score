@@ -19,6 +19,12 @@ documentation so that i dont forget whats goin on in the architecture and can lo
 - [ ] TIMEOUT for `\vote` based on `session_id`!!
 - [ ] model and implement score computation to `score_service`
 
+---
+
+### CURRENT ISSUES TO FIXLATER:
+- [ ] if no one has voted for a specific user, `compute_service` does not account them in computing `scores` 
+- [ ] add typehint to `service/` functions
+
 <br/>
 
 ---
