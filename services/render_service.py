@@ -1,6 +1,6 @@
 from db.database import SessionLocal
 from db.models.vote import Vote
-from services.user_service import get_user_by_username, get_username_by_id
+from services.user_service import get_user_by_username
 
 
 def render_scoreboard(scores):
@@ -42,3 +42,6 @@ def render_scoreboard(scores):
     db.close()
 
     return html
+
+
+# --- to add: render_scoreboard_voting

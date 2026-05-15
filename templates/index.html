@@ -1,23 +1,20 @@
 {% extends "base.html" %} {% block title %}INDEX{% endblock %} {% block content
 %}
 
-<h1 style="padding-top: 5%">AURA SCORE</h1>
-<br /><br /><br />
+<img
+    class="fire"
+    src="../static/img/fire.gif"
+    alt="this isnt supposed to happen"
+/>
+
+<h1 style="padding-top: 1.5%" class="main-title">AURA SCORE</h1>
+<a href="/vote-page" style="text-decoration: none">
+    <p class="vote-page-button">VOTE</p></a
+>
+<br />
 <hr />
 {{ scoreboard | safe }}
 <hr />
 <br /><br /><br />
-<a href="/vote-page"
-    ><p
-        style="
-            text-align: center;
-            font-family: Roboto;
-            color: #ffffff;
-            font-size: 26px;
-        "
-    >
-        VOTE
-    </p></a
->
 
 {% endblock %}

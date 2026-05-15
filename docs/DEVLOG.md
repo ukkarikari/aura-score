@@ -12,7 +12,7 @@
 
 - [ ] overhaul to vote page (new button + pop up layout instead of form)
 - [ ] TIMEOUT for `\vote` based on `session_id`!!
-- [ ] how to run the api from my machine and keep the cookies online on updates
+- [x] how to run the api from my machine and keep the cookies online on updates
 
 - [x] proper hashed authentication in `auth.py` and `/login` POST
 - [x] migrate `users` dict to proper `User` model
@@ -27,6 +27,8 @@
 - [ ] update docs!
 - [ ] if no one has voted for a specific user, `compute_service` does not account them in computing `scores` 
 - [ ] add typehint to `service/` functions
+- [ ] add auth to `/admin` lol
+- [x] add `<a>` back to index in vote page
 
 <br/>
 
@@ -50,6 +52,15 @@
   14:15 implementing sessions in db... its kind of confusing now whenever we use `SessionLocal()` from the db. importing it as `UserSession`
   14:23 implemented. seems to work fine. i gotta test this by actually hosting it and accessing it from another machine now. i will work on this.
   14:50 it works! sessions now persist over reloads. gotta run `uvicorn with --host 0.0.0.0`
+
+  15:25 will now start reworking the pages.
+  17:08 styled pages and css. added new fonts
+
+  i want the scoreboard to show:
+  - [ ] last reason for vote and who voted
+
+  ---
+  
 ```
 
 ---

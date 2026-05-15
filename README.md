@@ -14,7 +14,7 @@ ACME! aura tracker
 
 # planned features
 - [x] per user voting and scoring
-- [ ] user authentication system with persistent session cookies
+- [x] user authentication system with persistent session cookies
 - [ ] timeout modifier to prevent spam
 - [ ] dynamic UI for voting and score analysis
 - [ ] dynamic score computation using timeout modifier and global score share
@@ -27,7 +27,6 @@ ACME! aura tracker
   - alternate scoreboard for non-voter users
 
 <br>
-
 
 ---
 

@@ -37,8 +37,6 @@ def vote_page(request: Request, session_id: str | None = Cookie(default=None)):
 
     templates = get_templates()
     current_user = get_current_user(db, session_id)
-    # current_user = new_get_current_user(db, session_id)
-    # user_id = request.session.get("user_id")
 
     # - [ ] **TODO:** change this to say "wrong login or something"
     if not current_user:
@@ -48,10 +46,6 @@ def vote_page(request: Request, session_id: str | None = Cookie(default=None)):
             name="login.html",
             context={"request": request},
         )
-
-    # if not user_id:
-    #    print("no user_id")
-    #    return RedirectResponse("/login")
 
     current_username = get_username_by_id(db, current_user.id)  # pyright: ignore[reportArgumentType]
     print(current_username)
@@ -64,7 +58,7 @@ def vote_page(request: Request, session_id: str | None = Cookie(default=None)):
     scores = compute_scores(db)
     scoreboard_html = render_scoreboard(scores)
 
-    # removes curr user from votign options
+    # removes current user from voting options
     options = [u for u in users if u.id != current_user.id]  # pyright: ignore[reportGeneralTypeIssues]
     print(options)
 

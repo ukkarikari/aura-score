@@ -1,12 +1,46 @@
+@font-face {
+    font-family: "CloisterBlack";
+    src: url("fonts/CloisterBlack.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Olde Stencil";
+    src: url("fonts/Olde\ Stencil.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Ancient Medium";
+    src: url("fonts/Ancient\ Medium.ttf") format("truetype");
+}
+
 body {
-    font-family: "Roboto", sans-serif;
-    background: #222222;
+    font-family: "Arial", sans-serif;
+    background: #000000;
     color: #ffffff;
     margin: 0;
+    z-index: 1;
 }
 
 .container {
     text-align: center;
+}
+
+.main-title {
+    font-family: "CloisterBlack";
+    font-size: 10vh;
+}
+
+.vote-page-button {
+    font-family: "Olde Stencil";
+    font-size: 4vh;
+    color: #ff0000;
+    text-shadow: 0px 6px 6px #ff0000;
+    text-decoration: none;
+    transition: ease 0.1s;
+}
+
+.vote-page-button:hover {
+    transform: scale(1.5);
 }
 
 .scoreboard {
@@ -37,4 +71,16 @@ form {
 
 .avatar {
     height: 50px;
+}
+
+.fire {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    object-fit: cover;
+    object-position: bottom;
+    z-index: -1;
+    pointer-events: none;
 }
