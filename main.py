@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from sqladmin import Admin
+from starlette.middleware.sessions import SessionMiddleware
 
 from api.auth import router as login_router
 from api.pages import router_login_page, router_root, router_vote_page
@@ -12,6 +13,8 @@ from db.models.vote import VoteAdmin
 app = FastAPI()
 admin = Admin(app, engine)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# app.add_middleware(SessionMiddleware, secret_key="super-secret-random-string")
 
 # -- endpoints --
 app.include_router(vote_router)

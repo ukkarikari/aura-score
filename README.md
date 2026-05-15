@@ -12,7 +12,22 @@ ACME! aura tracker
 
 ---
 
-`screenshots and description will go here`
+# planned features
+- [x] per user voting and scoring
+- [ ] user authentication system with persistent session cookies
+- [ ] timeout modifier to prevent spam
+- [ ] dynamic UI for voting and score analysis
+- [ ] dynamic score computation using timeout modifier and global score share
+
+# possible features (ideas/mayybe)
+- [ ] vote history page 
+  - show target vote history (reason, voters, etc)
+  - show voter vote history (same)
+- [ ] alt scoreboard tab
+  - alternate scoreboard for non-voter users
+
+<br>
+
 
 ---
 
@@ -20,6 +35,8 @@ ACME! aura tracker
 
 <br>
 
-[documentation/dev-notes](docs/DOCS.md)
+[documentation](docs/DOCS.md)
+
+[devlog](docs/DEVLOG.md)
 
 </div>

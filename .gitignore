@@ -3,3 +3,5 @@ __pycache__/
 .venv/
 core/users.py
 *.pyc
+dump.py
+docs/prompt-template.md

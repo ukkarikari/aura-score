@@ -1,40 +1,18 @@
 
 <div align="center">
 
-# development notes for aura score 
-
-documentation so that i dont forget whats goin on in the architecture and can log changes
+# aura score architecture documentation
 
 </div>
 
 ---
 
-<br/>
+<div align="center">
 
-# MAJOR NEXT STEPS :
+  ## api/
 
-- [ ] proper hashed authentication in `auth.py` and `/login` POST
-- [ ] overhaul to vote page (new layout instead of form)
-- [ ] TIMEOUT for `\vote` based on `session_id`!!
-- [ ] how to run the api from my machine and keep the cookies online on updates
-
-- [x] migrate `users` dict to proper `User` model
-- [x] model and implement score computation to `score_service`
-
-(2026/05/14) - i think i might put a pause on the weight modellign....it seems a bit counter intuitive. maybe i should just leave the raw sums of votes for now and then make a more complex scoring feature instead of trying to guess how the user behavior will be like
-
----
-
-### CURRENT ISSUES TO FIXLATER:
-- [ ] if no one has voted for a specific user, `compute_service` does not account them in computing `scores` 
-- [ ] add typehint to `service/` functions
-
-<br/>
-
----
-
-# api/
 endpoints in here
+</div>
 
 ### api/auth.py
 - `/login` POST endpoint
@@ -66,7 +44,11 @@ endpoints in here
   - then passes both as context to the index jinja template and returns it.
 
 
-# core/
+<div align="center">
+
+  ## core/
+
+</div>
 
 ### core/templates.py
 literally just:
@@ -76,9 +58,12 @@ def get_templates():
 ```
 returns the templates defined in `templates/`
 
+<div align="center">
 
-# db/
-contains the database file and models
+  ## db/
+  contains database file and model declarations
+
+</div>
 
 ### db/database.py
 defines the engine, creates the `SessionLocal` variable used throughout the api to instanciate db sessions and stage changes
@@ -119,7 +104,13 @@ class Vote(Base):
     )
 ```
 
-# services/
+
+<div align="center">
+
+  ## services/
+  dfsdfsf
+
+</div>
 
 ### services/auth.py
 - defines the `sessions` dict, which is basically a list of `Users`associated with `session_id`s. 
@@ -164,25 +155,14 @@ def get_user_map(db):
     return {user.id: user.username for user in users}
  ```
 
-# templates/
-contains the html jinja files that are returned by `api/pages.py`
+<div align="center">
+
+  ## services/
+  contains the html jinja files that are returned by `api/pages.py`
+
+</div>
 
 --- 
-
-<br>
-
-# ideas/mayybe
-### vote history page 
-- show target vote history (reason, voters, etc)
-- show voter vote history (same)
-
-### alt score tab
-- alternate scoreboard for non-voter users
-
-
-<br>
-
----
 
 <br>
 

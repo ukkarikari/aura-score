@@ -1,10 +1,12 @@
 from fastapi import Cookie, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.routing import APIRouter
 
 from core.templates import get_templates
 from db.database import SessionLocal
 from services.auth import get_current_user
+
+# from services.auth import new_get_current_user
 from services.render_service import render_scoreboard
 from services.score_service import compute_scores
 from services.user_service import get_all_usernames, get_all_users, get_username_by_id
@@ -35,14 +37,21 @@ def vote_page(request: Request, session_id: str | None = Cookie(default=None)):
 
     templates = get_templates()
     current_user = get_current_user(db, session_id)
+    # current_user = new_get_current_user(db, session_id)
+    # user_id = request.session.get("user_id")
 
     # - [ ] **TODO:** change this to say "wrong login or something"
     if not current_user:
+        print("no current_usr")
         return templates.TemplateResponse(
             request=request,
             name="login.html",
             context={"request": request},
         )
+
+    # if not user_id:
+    #    print("no user_id")
+    #    return RedirectResponse("/login")
 
     current_username = get_username_by_id(db, current_user.id)  # pyright: ignore[reportArgumentType]
     print(current_username)
