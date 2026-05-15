@@ -24,11 +24,13 @@
 --- 
 
 # CURRENT ISSUES TO FIXLATER:
+- [ ] add vote_modal code to render_voting_scoreboard
 - [ ] update docs!
 - [ ] if no one has voted for a specific user, `compute_service` does not account them in computing `scores` 
 - [ ] add typehint to `service/` functions
 - [ ] add auth to `/admin` lol
 - [x] add `<a>` back to index in vote page
+- [ ] fix weird sql problem overflow thing
 
 <br/>
 
@@ -55,9 +57,8 @@
 
   15:25 will now start reworking the pages.
   17:08 styled pages and css. added new fonts
-
-  i want the scoreboard to show:
-  - [ ] last reason for vote and who voted
+  18:06 remade render_scoreboard() with additional feats, made stub for render_voting_scoreboard() function
+  which i'll use to make a vote modal window. to be done.
 
   ---
   

@@ -20,48 +20,79 @@ def compute_scores(db):
     return scores
 
 
-# # ==== sketch for new version... future. ====
-# TOTAL_SCORE = 100.0
-# BASE_WEIGHT = 1
-# MIN_WEIGHT = 0.1
-#
-#
-# def compute_scores(db):
-#     scores = {}
-#
-#     users = get_all_users(db)
-#
-#     # get vote sums grouped by target user
-#     vote_totals = dict(
-#         db.query(Vote.target_id, func.coalesce(func.sum(Vote.value), 0))
-#         .group_by(Vote.target_id)
-#         .all()
-#     )
-#
-#     # compute weights
-#     weights = {}
-#
-#     for user in users:
-#         net_votes = vote_totals.get(user.id, 0)
-#
-#         # base rep + votes
-#         weight = BASE_WEIGHT + net_votes
-#
-#         # normalize for negative or nil weights
-#         weight = max(MIN_WEIGHT, weight)
-#
-#         weights[user.username] = weight
-#
-#     total_weight = sum(weights.values())
-#
-#     print("--------")
-#     print(f"total_weight={total_weight}\n")
-#     for user in users:
-#         print(f"{user.username} weight={weights[user.username]}")
-#     print("--------")
-#
-#     for username, weight in weights.items():
-#         scores[username] = (weight / total_weight) * TOTAL_SCORE
-#
-#     return scores
-#
+# ==== sketch for new version... future. ====
+TOTAL_SCORE = 100.0
+BASE_WEIGHT = 1
+MIN_WEIGHT = 0.1
+
+
+def compute_score_percentages(db):
+    scores = {}
+
+    users = get_all_users(db)
+
+    # get vote sums grouped by target user
+    vote_totals = dict(
+        db.query(Vote.target_id, func.coalesce(func.sum(Vote.value), 0))
+        .group_by(Vote.target_id)
+        .all()
+    )
+
+    # compute weights
+    weights = {}
+
+    for user in users:
+        net_votes = vote_totals.get(user.id, 0)
+
+        # base rep + votes
+        weight = BASE_WEIGHT + net_votes
+
+        # normalize for negative or nil weights
+        weight = max(MIN_WEIGHT, weight)
+
+        weights[user.username] = weight
+
+    total_weight = sum(weights.values())
+
+    print("--------")
+    print(f"total_weight={total_weight}\n")
+    for user in users:
+        print(f"{user.username} weight={weights[user.username]}")
+    print("--------")
+
+    for username, weight in weights.items():
+        scores[username] = (weight / total_weight) * TOTAL_SCORE
+
+    return scores
+
+
+def get_user_score_percentage(db, username: str):
+    users = get_all_users(db)
+
+    user_lookup = {user.username: user.id for user in users}
+
+    if username not in user_lookup:
+        return None
+
+    vote_totals = dict(
+        db.query(Vote.target_id, func.coalesce(func.sum(Vote.value), 0))
+        .group_by(Vote.target_id)
+        .all()
+    )
+
+    weights = {}
+
+    for user in users:
+        net_votes = vote_totals.get(user.id, 0)
+
+        weight = BASE_WEIGHT + net_votes
+
+        weight = max(MIN_WEIGHT, weight)
+
+        weights[user.username] = weight
+
+    total_weight = sum(weights.values())
+
+    user_weight = weights[username]
+
+    return (user_weight / total_weight) * TOTAL_SCORE

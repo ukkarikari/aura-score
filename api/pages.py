@@ -7,7 +7,7 @@ from db.database import SessionLocal
 from services.auth import get_current_user
 
 # from services.auth import new_get_current_user
-from services.render_service import render_scoreboard
+from services.render_service import render_scoreboard, render_voting_scoreboard
 from services.score_service import compute_scores
 from services.user_service import get_all_usernames, get_all_users, get_username_by_id
 
@@ -56,7 +56,7 @@ def vote_page(request: Request, session_id: str | None = Cookie(default=None)):
     print(usernames)
 
     scores = compute_scores(db)
-    scoreboard_html = render_scoreboard(scores)
+    scoreboard_html = render_voting_scoreboard(scores)
 
     # removes current user from voting options
     options = [u for u in users if u.id != current_user.id]  # pyright: ignore[reportGeneralTypeIssues]

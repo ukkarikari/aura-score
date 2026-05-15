@@ -57,7 +57,6 @@ form {
 .row {
     display: flex;
     justify-content: space-between;
-    font-size: 26px;
     padding: 2% 1%;
 }
 
@@ -67,6 +66,25 @@ form {
 
 .row:nth-of-type(even) {
     background-color: #505050;
+}
+
+.row-voting {
+    display: flex;
+    justify-content: space-between;
+    transition: ease 0.1s;
+    padding: 2% 1%;
+}
+
+.row-voting:nth-of-type(odd) {
+    background-color: #808080;
+}
+
+.row-voting:nth-of-type(even) {
+    background-color: #505050;
+}
+
+.row-voting:hover {
+    transform: scale(1.1);
 }
 
 .avatar {
