@@ -24,6 +24,7 @@
 --- 
 
 # CURRENT ISSUES TO FIXLATER:
+- [ ] update docs!
 - [ ] if no one has voted for a specific user, `compute_service` does not account them in computing `scores` 
 - [ ] add typehint to `service/` functions
 
@@ -33,19 +34,22 @@
 
 # devlog
 
+```
 (2026/05/14) - going to implement a proper authentication feature using `passlib[bcrypt]`.
-to generate pwssd:
-```
-python -c "from passlib.hash import bcrypt; print(bcrypt.hash('passwordhere!!'))"
-```
-apparently bcrypt needs to be on v4.0.1 or earlier for this to work with the current passlib or smt.idk
+  to generate pwssd:
+    python -c "from passlib.hash import bcrypt; print(bcrypt.hash('passwordhere!!'))"
+  apparently bcrypt needs to be on v4.0.1 or earlier for this to work with the current passlib or smt.idk
 
-preliminary system working!
+  preliminary system working!
 
-damn im very confused now..... tried to add middleware thing but just made a mess.... need to review before refactoring:w
+  damn im very confused now..... tried to add middleware thing but just made a mess.... need to review before refactoring:w
 
 (2026/05/15) removed mess made by attempted session implementation. ok now. will do it properly.
+  13:32 will start implementing proper session system now 
+  13:46 will do it the stupid way and store sessions within the db
+  14:15 implementing sessions in db... its kind of confusing now whenever we use `SessionLocal()` from the db. importing it as `UserSession`
+  14:23 implemented. seems to work fine. i gotta test this by actually hosting it and accessing it from another machine now. i will work on this.
+  14:50 it works! sessions now persist over reloads. gotta run `uvicorn with --host 0.0.0.0`
+```
 
-
----
 ---

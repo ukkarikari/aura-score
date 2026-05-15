@@ -4,4 +4,5 @@ __pycache__/
 core/users.py
 *.pyc
 dump.py
-docs/prompt-template.md
+docs/issue-template.md
+docs/feature-template.md

@@ -1,30 +1,19 @@
+from db.models.session import Session
 from db.models.user import User
 
 sessions = {}
 
 
-def get_current_user(db, session_id):
+def get_current_user(db, session_token):
 
-    if not session_id:
+    if not session_token:
         return None
 
-    user_id = sessions.get(session_id)
+    db_session = (
+        db.query(Session).filter(Session.session_token == session_token).first()
+    )
 
-    if not session_id:
+    if not db_session:
         return None
 
-    curr = db.query(User).filter(User.id == user_id).first()
-
-    return curr
-
-
-# def new_get_current_user(db, request):
-#
-#    user_id = request.session.get("user_id")
-#
-#    if not user_id:
-#        return None
-#
-#    curr = db.query(User).filter(User.id == user_id).first()
-#
-#    return curr
+    return db_session.user

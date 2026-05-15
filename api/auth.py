@@ -8,7 +8,9 @@ from fastapi.routing import APIRouter
 from sqlalchemy.orm.session import Session
 
 from db.database import SessionLocal
-from services.auth import sessions
+from db.models.session import Session as UserSession
+
+# from services.auth import sessions
 from services.security import verify_password
 from services.user_service import get_user_by_username
 
@@ -34,12 +36,6 @@ def login(
 
     user = get_user_by_username(db, username)
 
-    # if not user or user.password_hash != password:  # pyright: ignore[reportGeneralTypeIssues]
-    #    print("------ bad login!! ----- ")
-    #    response = HTMLResponse("<p>bad login</p>")
-    #    response.headers["HX-Redirect"] = "/login"
-    #    return response
-
     if not user:
         print("------ bad login!! ----- ")
         response = HTMLResponse("<p>bad login</p>")
@@ -52,15 +48,27 @@ def login(
         response.headers["HX-Redirect"] = "/login"
         return response
 
-    # request.session["user_id"] = user.id
+    # session_id = str(uuid.uuid4())
+    # sessions[session_id] = user.id
 
     session_id = str(uuid.uuid4())
-    sessions[session_id] = user.id
 
-    print(type(sessions))
+    db_session = UserSession(
+        session_token=session_id,
+        user_id=user.id,
+    )
+
+    db.add(db_session)
+    db.commit()
+
+    # print(type(sessions))
 
     response = HTMLResponse("")
     response.headers["HX-Redirect"] = "/vote-page"
-    response.set_cookie(key="session_id", value=session_id)
+    response.set_cookie(
+        key="session_id",
+        value=session_id,
+        max_age=60 * 60 * 24 * 30,
+    )
 
     return response
